@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+    <style>
+        header{
+            border-bottom: 1px solid black;
+            box-sizing: border-box;
+        }
+        #todo_input{
+            width: 100%;
+            height: 5vh;
+            padding: 0.25rem;
+            font: 1rem bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="create_todo">
+            <input type="text" id="todo_input" placeholder="today todo is..." 
+                    onkeypress="if(event.keyCode==13)createMemo(this.value);">
+        </div>
+    </header>
+    <section id="todo_content">
+        
+    </section>
+
+    <script>
+        function createMemo(todo){
+            console.log('todo',todo);
+            var section = document.querySelector('#todo_content');
+            var div = document.createElement('div');
+            var text = document.createTextNode(todo);
+            div.appendChild(text);
+            section.append(div);
+        }
+    </script>
+
+</body>
+</html>
