@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title>Todo</title>
     <style>
+        :root{
+            --todo-back-odd:aqua;
+            --todo-back:rgba(0, 0, 0, 0.5);
+        }
+        body{
+            margin: 0;
+            padding: 0;
+        }
         header{
             border-bottom: 1px solid black;
             box-sizing: border-box;
@@ -14,6 +22,25 @@
             padding: 0.25rem;
             font: 1rem bold;
         }
+        #todo_content > div:nth-child(odd){/*홀수*/
+            background-color: var(--todo-back-odd);
+        }
+        #todo_content > div:nth-child(even){/*짝수*/
+            background-color: var(--todo-back);
+        }
+        .todo{
+            position: relative;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+        }
+        .close{
+            position: absolute;
+            width: 2rem;
+            top: 0;
+            right: 0.5rem;
+            text-align: center;
+            font-size: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -21,21 +48,97 @@
     <header>
         <div class="create_todo">
             <input type="text" id="todo_input" placeholder="today todo is..." 
-                    onkeypress="if(event.keyCode==13)createMemo(this.value);">
+                    onkeypress="if(event.keyCode==13)create_memo(this.value);">
         </div>
     </header>
     <section id="todo_content">
-        
+        <div class="todo">
+                구현 목록
+            <span class="close">X</span>
+        </div>
+        <div class="todo">
+                1. todo 추가
+            <span class="close">X</span>
+        </div>
+        <div class="todo">
+                2. todo 삭제
+            <span class="close">X</span>
+        </div>
+        <div class="todo">
+                3. 알림 설정(초 단위)
+            <span class="close">X</span>
+        </div>
     </section>
 
     <script>
-        function createMemo(todo){
-            console.log('todo',todo);
-            var section = document.querySelector('#todo_content');
+        var section = document.querySelector('#todo_content');
+        
+        function create_memo(todo){
+            console.log('d');
             var div = document.createElement('div');
+            //div.className += 'todo1';
+            div.classList.add('todo');
+
+            var span = document.createElement('span');
+            var x_close = document.createTextNode('X');
+            span.classList.add('close');
+            span.appendChild(x_close);
+
             var text = document.createTextNode(todo);
             div.appendChild(text);
             section.append(div);
+            div.append(span);
+            div.onclick = function(event) { set_notify(event); };
+            //div.setAttribute('onclick','console.log(\'blah\');');
+            //input 초기화
+            var input = document.querySelector('#todo_input');
+            input.value = '';
+        }
+
+        // Click on a close button to remove the current list item
+        var close = document.getElementsByClassName('close');
+        var i;
+        for (i = 0; i < close.length; i++){
+            close[i].onclick = function(){
+                var div = this.parentElement;
+                div.remove();
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        //알림 허용 여부
+        window.onload = function () {
+            if (window.Notification) {
+                Notification.requestPermission();
+            }
+        }
+
+        function set_notify(event) {
+            //var div = event.target;
+            var input = prompt('예약 시간을 설정해 주세요.(단위 : 초)', '숫자만 입력해 주세요.');
+            var text = event.target.textContent;
+            text = text.substring(0, text.length-1);//'X' remove
+            //console.dir(div);
+            alert(text);
+            setTimeout(function () {
+                notify(text);
+            }, Number(input)*1000);//5000 = 5초 = 5s
+        }
+
+        function notify(body_text) {
+            if (Notification.permission !== 'granted') {
+                alert('notification is disabled');
+            }
+            else {
+                var notification = new Notification('Notification title', {
+                    icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+                    body: body_text,
+                });
+ 
+                notification.onclick = function () {
+                    window.open('http://google.com');
+                };
+            }
         }
     </script>
 
