@@ -1,0 +1,168 @@
+:root{
+    --clear-width: 30px;
+    --clear-right: 20px;
+    --bg-w: rgba(255, 255, 255, 0.5);
+}
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+/* ------------ container ------------ */
+.container{
+    width:100%;
+    height: 100vh;
+    background-image: url('../img/pixabay_strikers_sunset_1920.jpg');
+    background-repeat: no-repeat;
+}
+
+/* ------------ header ------------ */
+.header{
+    width: 100%;
+    height:7.5vh;
+    /*background-image: url('../img/bg2.jpg');
+    background-size: 100% 200%;
+    background-repeat: no-repeat;
+    border-radius: 15px 15px 0 0;*/
+    position: relative;
+}
+.clear{
+    width : var(--clear-width);
+    height: 30px;
+    position: absolute;
+    right:var(--clear-right);
+    top: 20px;
+}
+.clear i{
+    font-size: 30px;
+    color: #FFF;
+}
+.clear i:hover{
+    cursor: pointer;
+    text-shadow: 1px 3px 5px #000;
+    transform: rotate(45deg);
+}
+#date{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #FFF;
+    font-size: 1.25rem;
+    font-family: 'Titillium Web', sans-serif;
+}
+/* ------------ add item ------------ */
+.add-to-do{
+    display: flex;
+    width: 100vw;
+    height:5vh;
+    background-color: var(--bg-w);
+    padding: 10px;
+}
+.add-to-do i{
+    position: relative;
+    font-size: 3rem;
+    color: #4162f6;
+}
+
+.add-to-do input{
+    position: relative;
+    left: 2%;
+    height: 100%;
+    width: calc(70vw - var(--clear-width) -var(--clear-right));
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    border: none;
+}
+
+/* ------------ content ------------ */
+.content{
+    width:100vw;
+    height: 92.5vh;
+    min-height:350px;
+    background-color: var(--bg-w);
+    overflow: auto;
+}
+.content::-webkit-scrollbar { 
+    display: none; 
+}
+.content ul{
+    padding:0;
+    margin:0;
+}
+.item{
+    width:95%;
+    height: 45px;
+    min-height: 45px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.item i.co{
+    position: absolute;
+    font-size: 25px;
+    padding-left:5px;
+    left:15px;
+    top:10px;
+}
+.item i.co:hover{
+    cursor: pointer;
+}
+.fa-check-circle{
+    color:#6eb200;
+}
+.item p.text{
+    position: absolute;
+    padding:0;
+    margin:0;
+    font-size: 20px;
+    left:50px;
+    top:5px;
+    max-width:285px;
+}
+.lineThrough{
+    text-decoration: line-through;
+    color : #000;
+}
+.item i.de{
+    position: absolute;
+    font-size: 25px;
+    right:15px;
+    top:10px;
+}
+.item i.de:hover{
+    color:#af0000;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
