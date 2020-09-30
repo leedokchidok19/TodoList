@@ -11,7 +11,6 @@ let LIST, id;
 
 //get item from localstorage
 let data = localStorage.getItem('todo');
-console.log('dat', data);
 
 //check if data is not empty
 if(data){
@@ -24,7 +23,7 @@ if(data){
     LIST = [];
     id = 0;
 }
-console.log('ss');
+
 //load items to the user's interface
 function loadList(array){
     array.forEach(function(item){
@@ -47,7 +46,7 @@ const LINE_THROUGH = 'lineThrough';
 const options = {weekday : 'long', month : 'short', day : 'numeric'};
 const today = new Date();
 
-//dateElement.innerHTML = today.toLocaleDateString('en-US', options);
+//dateElement.innerHTML = today.toLocaleDateString('ko-KR', options);
 
 //add to do function
 
@@ -139,37 +138,35 @@ list.addEventListener('click', function(event){
 //addToDo('coffee', 1, true, false);
 
 ///////////////////알림
-        //알림 허용 여부
-        window.onload = function () {
-            if (window.Notification) {
-                Notification.requestPermission();
-            }
-        }
+//알림 허용 여부
+window.onload = function () {
+    if (window.Notification) {
+        Notification.requestPermission();
+    }
+}
 
-        function set_notify(event) {
-            //var div = event.target;
-            var input = prompt('예약 시간을 설정해 주세요.(단위 : 초)', '숫자만 입력해 주세요.');
-            var text = event.target.textContent;
-            text = text.substring(0, text.length-1);//'X' remove
-            //console.dir(div);
-            alert(text);
-            setTimeout(function () {
-                notify(text);
-            }, Number(input)*1000);//5000 = 5초 = 5s
-        }
+function set_notify(event) {
+    //var div = event.target;
+    var input = prompt('예약 시간을 설정해 주세요.(단위 : 초)', '숫자만 입력해 주세요.');
+    var text = event.target.textContent;
+    text = text.substring(0, text.length-1);//'X' remove
 
-        function notify(body_text) {
-            if (Notification.permission !== 'granted') {
-                alert('notification is disabled');
-            }
-            else {
-                var notification = new Notification('Notification title', {
-                    icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-                    body: body_text,
-                });
+    setTimeout(function () {
+        notify(text);
+    }, Number(input)*1000);//5000 = 5초 = 5s
+}//set_notify end
+
+function notify(body_text) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }else {
+        var notification = new Notification('Notification title', {
+        icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+        body: body_text,
+        });
  
-                notification.onclick = function () {
-                    window.open('http://google.com');
-                };
-            }
-        }
+        notification.onclick = function () {
+            window.open('http://google.com');
+        };
+    }//else end
+}//notify end
